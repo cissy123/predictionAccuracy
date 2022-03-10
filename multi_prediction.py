@@ -60,7 +60,7 @@ def predict(shuffle_data, alg, k_fold_num, score_result, file_num):
             score_result[file_num][alg_idx] += metrics.accuracy_score(y_test, pred_result) / in_uniqueGroup
             loop_num += 1
             print('algorithm {} score={}'.format(alg_type, metrics.accuracy_score(y_test,
-                                                                                                         pred_result) / in_uniqueGroup))
+                                                                                  pred_result) / in_uniqueGroup))
 
     # return original index
     compare_result_t = list(map(list, zip(*compare_result)))
@@ -118,19 +118,22 @@ def run(dataset, specialAlleleList, alg, output, k_fold_num):
 
         for file_idx, file_name in enumerate(dataset_dirs):
             shuffle_data = read_data(dataset, dataset_dirs[file_idx], specialAlleleList)
+            if len(shuffle_data[0]) < k_fold_num:
+                print('Sample size is too small')
+                continue
             data, groupName, compare_result = predict(shuffle_data, alg, k_fold_num, score_result, file_idx)
             save_pred_result(result, file_name, data, groupName, alg, compare_result)
         save_score_result(result, dataset_dirs, score_result)
         result.save(output)
-    except:
-        print('compute error')
+    except Exception as e:
+        print('compute error: {}'.format(e))
     else:
         print('compute success. {} is written'.format(output))
     return
 
 
 if __name__ == '__main__':
-    dataset_folder = "./dataset_test"
+    dataset_folder = "./dataset_example"
     pred_alg = ['knn', 'randomForest', 'decisionTree', 'naiveBayes', 'logisticRegression', 'svm']
     output_file_name = 'result_xxx.xlsx'
     specialAlleleList = ['DYS385', 'DYF387S1']
