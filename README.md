@@ -9,11 +9,11 @@ It should be noted that there should be at lease TWO Haplogroup of each file.
 
 ### step2. Configure
 Open file 'multi_prediction.py'. you can configure  In the last few lines of code.
-'dataset_folder' ---- name of your data set of step 1
-'pred_alg' ---- prediction algorithms you wanna try, six types are supported
-'output_file_name' ---- whatever you like
-'specialAlleleList' ---- special alleles which may contain more than one value
-'k_fold_num' ---- the parameter applied in K FOLD CROSS VALIDATION method while prediction, this number should not less than the samples number
+- 'dataset_folder' ---- name of your data set of step 1
+- 'pred_alg' ---- prediction algorithms you wanna try, six types are supported
+- 'output_file_name' ---- whatever you like
+- 'specialAlleleList' ---- special alleles which may contain more than one value
+- 'k_fold_num' ---- the parameter applied in K FOLD CROSS VALIDATION method while prediction, this number should not less than the samples number
 
 ### step3. Run
 ```
